@@ -33,6 +33,8 @@ institute: Standort Köln
 
 ```{r setup, include=FALSE}
 library(knitr)
+library(mosaic)
+library(corrgram)
 library(tidyverse)
 knitr::opts_chunk$set(
     echo = TRUE,
@@ -634,3 +636,228 @@ Die Videos wurden von Frau Prof. Ferreira erstellt.
 
 ## Eine kurze Datenanalyse
 
+Im folgenden kann man ein paar der Möglichkeiten von **R** finden, wie man sie in Vorlesungen braucht.
+
+Dazu nehmen wir die Daten *tips* aus dem Unterrichtsmaterial von Prof. Dr. S. Sauer.
+
+
+```{r, echo=TRUE}
+library(readr)
+tips <- read_csv(file= paste0("https://raw.githubusercontent.com/sebastiansauer/",
+                        "Daten_Unterricht/master/tips.csv"))
+#tips$X1 <- NULL
+```
+
+Darüberhinaus nutzen wir einige Befehle aus dem Paket **Mosaic**, welches wir dazu laden
+```{r}
+library(mosaic)
+```
+
+## Daten ansehen
+
+Schauen wir uns die Daten etwas an:
+
+```{r}
+glimpse(tips)
+```
+
+Dimension des Datensatzes:
+```{r}
+dim(tips)
+```
+
+
+Die ersten vier Zeilen:
+```{r}
+head(tips, 4)
+```
+
+## Balkendiagramm bei kategorialen Daten
+
+```{r}
+bargraph(~sex, data=tips)
+```
+
+
+## Histogramm bei metrischen Daten
+
+```{r}
+histogram( ~tip, data=tips)
+```
+
+## Histogramm bei metrischen Daten, facettiert
+
+```{r}
+histogram( ~tip | sex, data=tips)
+```
+
+## Boxplots bei merischen Daten
+
+```{r}
+bwplot( ~tip, data=tips)
+```
+
+## Boxplot mit metrischen Daten für Gruppem
+
+```{r}
+bwplot(tip ~ sex, data=tips)
+```
+
+
+## Boxplot mit metrischen Daten für Gruppem, facettiert 
+```{r}
+bwplot( tip ~ sex | smoker, data=tips)
+```
+
+## Streudiagramm mit zwei metrischen Variablen
+
+```{r}
+xyplot(tip~total_bill, data=tips)
+```
+
+
+## Häufigkeitstabellen zwei kategorialen Variablen
+
+Dazu generieren wir die Häufigkeitstabelle mit dem Befehl *tally* und speichern sie in *tab*
+
+```{r}
+tab <-tally(sex ~ smoker, data=tips)
+tab
+```
+
+Eine Variante mit relativen Häufigkeiten erhält man mit:
+
+```{r}
+tally(sex ~ smoker, format="proportion", data=tips)
+```
+
+
+## mosaicplot mit zwei kategorialen Variablen
+
+
+Mit der Tabelle *tab*  kann nun ein mosaic plot generiert werden:
+
+```{r}
+mosaicplot(tab)
+```
+
+## Korrelationsplot mit metrischen Variablen
+
+```{r}
+# ggf: 
+# install.packages("corrgram", dependencies=T)
+library(corrgram)
+corrgram(tips)
+```
+
+## Kennzahlen
+
+Mittelwert
+```{r}
+
+mean(tip~sex, data=tips)
+```
+
+Anstatt *mean* können alle Lageparameter und Streumaße erechnet werden (min, max, median, sd, var):
+```{r}
+favstats(tip~sex, data=tips)
+```
+
+Korrelation als Zusammenhangsmaß mit metrischen Variablen
+```{r}
+cor(tip~total_bill, data=tips)
+```
+
+## $\chi^2$-Test
+Test der Unabhängigkeit geht nur mit zwei nominalen Variablen. In *tab* haben wir solche schon generiert.
+
+```{r}
+xchisq.test(tab)
+```
+
+## t-Test für abhängige Stichproben (Differenzentest)
+
+Variablen müssen beide metrische sein und zwischen beiden Variablen wird eine Differenz gebildet.
+
+Die Forschungsfrage lautet meist:
+
+ - V1 unterscheidet sich von V2 (ungerichtet)
+ - V1>V2 (gerichtet)
+ - V2>V1 (gerichtet)
+
+```{r}
+t.test(~(tip-total_bill), data=tips)
+```
+## t-Test für abhängige Stichproben (Differenzentest) 
+
+Wenn die Forschungshypothese (Alternativhypothese) gerichtet ist, und
+V1-V2 < 0 ist, dann wird das Argument alternative="less" hinzugefügt,
+wenn V1-V2 > 0, dann "greater".
+
+```{r}
+t.test(~(tip-total_bill), alternative="less", data=tips)
+```
+
+**Achtung:**
+Bei der Dokumentation von t-Tests ist es wichtig, einseitiges Testen von zweiseitigem Testen zu unterscheiden (einseitig/zweiseitig).
+
+
+## ANOVA (Varianzanalyse)
+
+Bezüglich einer Gruppe (nominale Variable) mit mehr als zwei levels wird eine metrische Variable getestet.
+
+```{r}
+bwplot(tip~day, data=tips)
+```
+
+
+## ANOVA (Varianzanalyse)
+
+```{r}
+favstats(tip~day, data=tips)
+```
+
+*Forschungshypothese:* Es gibt einen Unterschied beim Trinkgeld bei/zwischen den Tagen.
+
+```{r}
+summary(aov(tip~day, data=tips))
+```
+
+
+## Lineare Einfachregression mit metrischer Variable.
+
+Modellierung einer angängigen Variable (AV) durch eine unabhängige Variable (UV).
+```{r}
+Mod1<-lm(tip~total_bill, data=tips)
+summary(Mod1)
+```
+
+## Lineare Einfachregression mit kategorialer UV
+
+```{r}
+Mod2<-lm(tip~day, data=tips)
+summary(Mod2)
+```
+**Achtung:** Das nicht ausgegbene level in der Ausgabe ist das Referenzlevel.
+
+## Multiple Regression
+
+```{r}
+Mod3<-lm(tip~total_bill + sex + smoker + day + time + size, data=tips)
+summary(Mod3)
+```
+
+
+## Der Befehl *step*
+
+Mit dem Befehl *step* führt man eine stufenweise Regressionsanalyse durch,
+bei der die Variablen nach der Reihenfolge ihrer Wichtigkeit entfernt werden.
+
+```{r}
+step(Mod3)
+```
+
+
+## Quellen
+
+Ein großer Teil der Beispiele stammt von Prof. Dr. Oliver Gansser aus seinem Handout "Wichtige Befehle in R - Datenerhebung und Statistik" vom 15. Dezember 2016, welches mir von Prod. Dr. Schwarz freundlicherweise überlassen wurde.

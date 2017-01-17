@@ -77,7 +77,7 @@
     \ifthenelse{\equal{\insertframenumber}{1}}{%
 }{%
    \begin{beamercolorbox}[ht=4ex,leftskip=.2cm,rightskip=.3cm]{author in head/foot}
-   	\scriptsize\tiny\bf
+   	\tiny\footnotesize\scriptsize\bf
 	\includegraphics[%
 	  	width=0.9\paperwidth%
 		]{%
@@ -85,14 +85,15 @@
 	}%
 	\newline
 	\vspace{0.1cm}
-    	\newline
+    \newline
    	{%
+   	    
 		\hspace*{0.2cm}\insertdate} % 
-    		\hfil
-   		 \insertshortauthor  \, $|$ \,  \inserttitle % 
+    	\hfil
+   		\insertshortauthor  \, $|$ \,  \inserttitle % 
     
-    		\vspace*{-0.9em}%
-     		\raggedleft{\insertframenumber \hspace*{0.3cm}}%
+    	\vspace*{-0.9em}%
+     	\raggedleft{\insertframenumber \hspace*{0.3cm}}%
    \end{beamercolorbox}
    \vspace*{0.2cm}
 }
