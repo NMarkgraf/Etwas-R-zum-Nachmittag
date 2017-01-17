@@ -1,6 +1,10 @@
 %
-% Copyright 2016 by Norman Markgraf
+% Copyright 2016,17 by Norman Markgraf
 %
+\newlength{\myPaperWidth}
+\newlength{\myPaperHeight}
+\setlength{\myPaperWidth}{160mm}
+\setlength{\myPaperHeight}{120mm}
 \usepackage{ifthen}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -19,7 +23,7 @@
 {
 	\begin{tikzpicture}[remember picture, overlay]
 		\node[inner sep=0pt] at (current page.center){%
-        			\includegraphics[width=140mm,height=105mm]{images/hintergrund}%
+        			\includegraphics[width=\myPaperWidth,height=\myPaperHeight]{images/hintergrund}%
     	};%
    		\node[shift={(-0.7cm,-0.7cm)},inner sep=0pt] at (current page.north east){%
    		     		\includegraphics[width=1cm,height=1cm]{images/logo_FOM_kurz}%
