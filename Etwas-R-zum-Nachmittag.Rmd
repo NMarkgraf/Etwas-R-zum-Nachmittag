@@ -1,7 +1,7 @@
 ---
-title: "Etwas R am Abend"
+title: "Etwas R zum Nachmittag"
 author: "Norman Markgraf"
-date: "21.11.2016"
+date: "18.01.2017"
 output:
   beamer_presentation:
     fig_caption: no
@@ -33,6 +33,7 @@ institute: Standort Köln
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(
     echo = TRUE,
     background="#A7A7A7",
@@ -40,9 +41,16 @@ knitr::opts_chunk$set(
     out.width="80%",
 #   cache = TRUE,
 #    tidy=TRUE,
-    fig.align = "center"
+    fig.align = "center",
+    eval = TRUE, 
+    include= TRUE
 )
 ```
+
+```{r, eval=FALSE}
+summary(cars)
+```
+
 
 ## Was ist eigentlich R?
 
@@ -93,22 +101,22 @@ Falls Sie gerne **Werbevideos** ansehen, hier ein Link [https://www.youtube.com/
 
 **R** ist ein eine *komandozeilenorientierte*-Sprache!
 
-```{r, echo = TRUE}
+```{r echo = TRUE}
 1+1
 ```
 
-```{r, echo = TRUE}
+```{r echo = TRUE}
 1+2*3^4
 ```
 
-```{r, echo = TRUE}
+```{r echo = TRUE}
 x <- 1; y <- 2
 x+y
 ```
 
 ## Einfach nur R oder darf es etwas mehr sein?
 Die mit unter recht schnell schöne Ergebnisse produzieren kann:
-```{r, echo=TRUE}
+```{r echo=TRUE}
 x <- seq(-pi,pi,by=0.1)
 plot(x, sin(x),  type="l", col="red",
      main="Sinuskurve")
@@ -153,8 +161,8 @@ Noch besser ist die Nutzung von Integrierten Entwicklungsumgebenung (*IDE*), wie
 ## Die wichtigsten Pakete und wie man diese installiert
 
 Im Allgemeinen instaliert man ein Paket <blubber> durch den Befehl:
-```{r, eval=FALSE, echo=TRUE}
-install.packages("<blubber>", dependencies=TRUE)
+```{r echo=TRUE, eval=FALSE}
+# install.packages("<blubber>", dependencies=TRUE)
 ```
 
 Für einen guten Start sollte man folgende Pakete installieren:
@@ -190,17 +198,17 @@ Für einen guten Start sollte man folgende Pakete installieren:
         
 Die ersten Befehle sollten wie folgt lauten:
 
-```{r, eval=FALSE, echo=TRUE}
+```{r eval=-c(0:4), echo=TRUE}
 # Laden von tidyverse Paketen:
-install.packages("tidyverse", dependencies=TRUE) 
+#install.packages("tidyverse", dependencies=TRUE) 
 # Laden des mosaic Pakets:
-install.packages("mosaic", dependencies=TRUE) 
+#install.packages("mosaic", dependencies=TRUE) 
 ```
 
 Ach ja, mit '#' leitet man einen Kommentar ein. Sie müssen das also nicht mit den Kommentaren eintippen, es reicht:
-```{r, eval=FALSE, echo=TRUE}
-install.packages("tidyverse", dependencies=TRUE) 
-install.packages("mosaic", dependencies=TRUE) 
+```{r eval=FALSE, echo=TRUE}
+#install.packages("tidyverse", dependencies=TRUE) 
+#install.packages("mosaic", dependencies=TRUE) 
 ```
 
 Bitte bestätigen Sie alle Anfragen und haben Sie etwas Gedult. Es wird eine Menge nachgeladen. Aber nur einmal. Also keine Sorge!
