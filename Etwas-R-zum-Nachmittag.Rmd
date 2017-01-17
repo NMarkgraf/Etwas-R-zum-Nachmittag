@@ -33,6 +33,7 @@ institute: Standort Köln
 
 ```{r setup, include=FALSE}
 library(knitr)
+library(tidyverse)
 knitr::opts_chunk$set(
     echo = TRUE,
     background="#A7A7A7",
@@ -155,7 +156,7 @@ Noch besser ist die Nutzung von Integrierten Entwicklungsumgebenung (*IDE*), wie
 
 Im Allgemeinen instaliert man ein Paket <blubber> durch den Befehl:
 ```{r echo=TRUE, eval=FALSE}
-# install.packages("<blubber>", dependencies=TRUE)
+install.packages("<blubber>", dependencies=TRUE)
 ```
 
 Für einen guten Start sollte man folgende Pakete installieren:
@@ -179,32 +180,37 @@ Für einen guten Start sollte man folgende Pakete installieren:
     + [Project MOSAIC](http://mosaic-web.org)
     + [Less Volume, More Creativity – Getting Started with the mosaic Package](https://cran.r-project.org/web/packages/mosaic/vignettes/LessVolume-MoreCreativity.html)  
 
-- *Daten* zum Experimentieren und Spielen
+- *Daten* zum Experimentieren und Spielen und ("**R**"-)Forschen:
+    
+    Prof. Dr. Sebastian Sauer hat auf *GitHub* eine kleine Sammlung von Daten zusammengestellt.
+    Diese werden u.a. im Fach "Datenerhebung und Statistik" genutzt und sind ein guter Ausgangspunkt um ein paar Schritt in **R** selber zu gehen.
+    Sie finden die Daten unter:
 
-  Die Daten als Rundlage zu den Beispielen hier, finden Sie unter:
+    https://github.com/sebastiansauer/Daten_Unterricht 
 
-  https://github.com/sebastiansauer/Daten_Unterricht 
-
-  Entzippen Sie den herunter geladenen Ordner; dort finden Sie die hier verwendeten Daten.
+    Entzippen Sie den herunter geladenen Ordner. Darin finden Sie die hier verwendeten Datensätze.
   
 ## Die wichtigsten Pakete und wie man diese installiert
         
 Die ersten Befehle sollten wie folgt lauten:
 
-```{r eval=-c(0:4), echo=TRUE}
+```{r eval=FALSE, echo=TRUE}
 # Laden von tidyverse Paketen:
 install.packages("tidyverse", dependencies=TRUE) 
 # Laden des mosaic Pakets:
 install.packages("mosaic", dependencies=TRUE) 
 ```
 
-Ach ja, mit '#' leitet man einen Kommentar ein. Sie müssen das also nicht mit den Kommentaren eintippen, es reicht:
+Für die Eingabe in der Konsole reicht es, die Zeilen OHNE ein '#' am Anfang einzutippen.
+Mit '#' leitet  man einen Kommentar ein. In der Konsole reicht daher:
 ```{r eval=FALSE, echo=TRUE}
 install.packages("tidyverse", dependencies=TRUE) 
 install.packages("mosaic", dependencies=TRUE) 
 ```
 
-Bitte bestätigen Sie alle Anfragen und haben Sie etwas Gedult. Es wird eine Menge nachgeladen. Aber nur einmal. Also keine Sorge!
+Bitte bestätigen Sie alle Anfragen und haben Sie etwas Geduld. Es wird eine Menge nachgeladen. 
+
+Aber nur einmal. Also keine Sorge!
 
 ## **R** als Taschenrechner
 
@@ -481,7 +487,7 @@ rm()
 * Mit der Installation von **R** haben Sie eine Grundausstattung an wichtigen Paketen, welche Sie nach belieben erweitern können und sollten!
 * Die wichtigsten Pakete gibt es beim [*C*omprehensive *R* *A*rchive *N*etwork](http://cran.r-project.org) kurz **CRAN**.
 
-## Pakete installieren
+## Pakete installieren und aktualisieren
 
 Um ein Paket, zum Beispiel **ggplot2**, zu installieren benuzt man den Befehl:
 ```{r, eval=FALSE, echo=TRUE}
@@ -493,14 +499,14 @@ Um gleichzeitig weitere, notwednige Pakete zu installieren nutzt man die Option 
 install.packages("ggplot2", dependencies=TRUE)
 ```
 
-Es gibt aber noch andere Wege.
-
-## Pakete aktualisieren
-
 Mit der Funktion 
 ```{r, eval=FALSE, echo=TRUE}
 update.packages()
 ```
+werden installierte Pakete mit denen von CRAN hinterlegten verglichen und ggf. akualisiert.
+
+Es gibt aber noch andere Wege. (Z.B. direkt in RStudio)
+
 
 ## Pakete benutzen
 
@@ -522,20 +528,27 @@ require(ggplot2)
 [1] TRUE
 ```
 
-## Verwaltung von Paketen
-
-
 
 ## Wir laden ein paar Daten
 
 - Via **RStudio**:
-    Gehen Sie auf das recht obere Fenster und klicken Sie **Import Dataset**, danach **From Web URL** und geben Sie 
-    als URL bitte *https://raw.githubusercontent.com/NMarkgraf/Etwas-R-zum-Nachmittag/master/Datasets/miete03.asc* ein.
-    Beachten 
+    
+    Gehen Sie auf das recht obere Fenster und klicken Sie **Import Dataset**, danach **From CSV...** und geben Sie 
+    als URL bitte 
+        https://raw.githubusercontent.com/NMarkgraf/Etwas-R-zum-Nachmittag/master/Datasets/miete03.asc 
+    ein. 
+    
+    Drücken Sie *Update*.
+    
+    Stellen Sie *Delimiter* auf *Tab*.
+    
+    Drücken Sie dann *Import*
     
 - Via **R** direkt:
-  Man kann auch direkt aus **R** mittels ein paar Zeilen die Daten laden!
-  Laden wir ein paar Demodaten aus dem Netz:
+    Man kann auch direkt aus **R** mittels ein paar Zeilen die Daten laden!
+    
+    Die selben Daten können Sie u.a. durch die Zeilen
+    
 ```{r, eval=TRUE, echo=TRUE}
  miete03 <- read.table(
     file = paste0("https://raw.githubusercontent.com/NMarkgraf/",
@@ -543,7 +556,8 @@ require(ggplot2)
     header = TRUE)
 ```
 
-
+    aus dem Netz laden.
+    
 ## Die ersten Zeilen der Tabelle ansehen
 
 Mit dem Befehl **head()** schaut man sich die ersten Zeilen (im Bsp. die ersten 4 Zeilen) eines *Dataframes* an:
@@ -561,10 +575,23 @@ tail(miete03, 3)
 
 ## Häufigkeitstabelle und Balkendiagramme
 
-Mit dem Befehl **table** können wir eine *Häufigkeitstabelle* erstellen:
+Mit dem Befehl **table** können wir eine *(absolute) Häufigkeitstabelle* erstellen:
 ```{r,  eval=TRUE, echo=TRUE}
 table(miete03$rooms)
 ```
+
+Eine *relative Häufigkeitstabelle* erhält man durch:
+```{r,  eval=TRUE, echo=TRUE}
+prop.table(table(miete03$rooms))
+```
+
+## Ein anderer Weg ... mit dem Paket *dplyr*
+```{r}
+library(dplyr)
+miete03 %>% group_by(rooms) %>% tally(sort=TRUE)
+```
+
+
 ## Häufigkeitstabelle und Balkendiagramme
 
 Und mit dem Befehl **barplot()** erstellen wir ein Balkendiagramm daraus:
@@ -604,3 +631,6 @@ Hier finden Sie Videos, die einige Schritte der Datenaufbereitung und deskriptiv
 - Datenmatrix erstellen https://youtu.be/-EaeBL9J4IE
 
 Die Videos wurden von Frau Prof. Ferreira erstellt. 
+
+## Eine kurze Datenanalyse
+
