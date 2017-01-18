@@ -67,17 +67,10 @@ knitr::opts_chunk$set(
     - viele Grafikmöglichkeiten 
     - standardisiertes, einfach handhabbares Datenformat (data.frame)
     - gut durchdachtes Format zur Anpassung von (Regressions-)Modellen
-
-## Was ist eigentlich R?
-
-**Programmiersprache R**:
-
-- **Vorteile (Forts.):**
     - aktive Entwicklergruppe, hilfreiche Mailingliste
     - modularer Aufbau mit mehr als 8000 Erweiterungspaketen
     - man kann ansprechende Diagramme und interaktive Apps entwickeln (z.B. [plotly](https://plot.ly/r/), [shiny](http://shiny.rstudio.com)).
     - führende Plattform für statistische Analysen
-
 
 -  **Nachteile:**
     - bisher keine echte “Standard”-GUI (aber es gibt ja RStudio)
@@ -97,7 +90,7 @@ Falls Sie gerne **Werbevideos** ansehen, hier ein Link [https://www.youtube.com/
 
 ## Einfach nur R oder darf es etwas mehr sein?
 
-**R** ist ein eine *komandozeilenorientierte*-Sprache!
+**R** ist ein eine *komandozeilenorientierte*-(Programmier-)Sprache!
 
 ```{r echo = TRUE}
 1+1
@@ -111,6 +104,11 @@ Falls Sie gerne **Werbevideos** ansehen, hier ein Link [https://www.youtube.com/
 x <- 1; y <- 2
 x+y
 ```
+
+```{r echo=TRUE}
+x = 1; y = 2; print(x+y)
+```
+
 
 ## Einfach nur R oder darf es etwas mehr sein?
 Die mit unter recht schnell schöne Ergebnisse produzieren kann:
@@ -128,18 +126,14 @@ Besser ist es aber seine Skripte vorab mit Hilfe eines Texteditors zu schreiben 
 
 Noch besser ist die Nutzung von Integrierten Entwicklungsumgebenung (*IDE*), wie z.B.
 
-- [RStudio](https://www.rstudio.com)
-- [Rcmdr](http://www.rcommander.com) 
-- [StatET for R](http://www.walware.de/goto/statet)  
-    eine auf [Eclipse](http://www.eclipse.org/eclipse/) basierende IDE für R
-- [ESS](http://ess.r-project.org) 
-    ein add-on package für GNU Emacs und XEmacs
-
-## Was bekommt man wo und wie?
+- [RStudio](https://www.rstudio.com)  
+- [Rcmdr](http://www.rcommander.com)   
+- [StatET for R](http://www.walware.de/goto/statet)   eine auf [Eclipse](http://www.eclipse.org/eclipse/) basierende IDE für R
+- [ESS](http://ess.r-project.org)  ein add-on package für GNU Emacs und XEmacs
 
 **Empfehlung:**
 
-- **R** (3.3.2) ,
+- **R** (Version 3.3.2) ,
     - **R** finden Sie hier: https://cran.rstudio.com oder https://www.r-project.org
     - Aktuell ist die Version 3.3.2
     - **Achtung MAC-Nuzter!!!**: Sie benötigen zusätlich erst noch XQuartz. 
@@ -147,12 +141,13 @@ Noch besser ist die Nutzung von Integrierten Entwicklungsumgebenung (*IDE*), wie
         
 - **RStudio** (Desktop-Version 1.0.136) (vergessen Sie lieber den **R-Cmdr**)
     - Die aktuelle Version finden Sie hier: https://www.rstudio.com/products/rstudio/download/
-    - Oder, für mutige, die tagesaktuelle Entwicklerversion von hier: https://dailies.rstudio.com
+    - Oder die tagesaktuelle Entwicklerversion von hier: https://dailies.rstudio.com
   
 ## Die Installation
 
 - Die wichtigsten Schritte bei der Installation: 
     - Abwarten und bestätigen ;-)
+
 
 ## Die wichtigsten Pakete und wie man diese installiert
 
@@ -172,8 +167,6 @@ Für einen guten Start sollte man folgende Pakete installieren:
     + [ggplot2](http://ggplot2.org)     # DAS Grafikpaket von *R*
     + [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)       # Das Paket zur Daten manipulation
     + [readr](https://blog.rstudio.org/2016/08/05/readr-1-0-0/)       # Das Paket zum Einlesen von Daten 
-    
-## Die wichtigsten Pakete und wie man sie installiert
 
 - **mosaic**
     
@@ -181,6 +174,7 @@ Für einen guten Start sollte man folgende Pakete installieren:
     
     + [Project MOSAIC](http://mosaic-web.org)
     + [Less Volume, More Creativity – Getting Started with the mosaic Package](https://cran.r-project.org/web/packages/mosaic/vignettes/LessVolume-MoreCreativity.html)  
+## Spielmaterial für den Anfang
 
 - *Daten* zum Experimentieren und Spielen und ("**R**"-)Forschen:
     
@@ -188,7 +182,11 @@ Für einen guten Start sollte man folgende Pakete installieren:
     Diese werden u.a. im Fach "Datenerhebung und Statistik" genutzt und sind ein guter Ausgangspunkt um ein paar Schritt in **R** selber zu gehen.
     Sie finden die Daten unter:
 
+
+
     https://github.com/sebastiansauer/Daten_Unterricht 
+
+
 
     Entzippen Sie den herunter geladenen Ordner. Darin finden Sie die hier verwendeten Datensätze.
   
@@ -201,6 +199,8 @@ Die ersten Befehle sollten wie folgt lauten:
 install.packages("tidyverse", dependencies=TRUE) 
 # Laden des mosaic Pakets:
 install.packages("mosaic", dependencies=TRUE) 
+# Laden des corrgram Pakets:
+install.packages("corrgram", dependencies = T)
 ```
 
 Für die Eingabe in der Konsole reicht es, die Zeilen OHNE ein '#' am Anfang einzutippen.
@@ -208,6 +208,7 @@ Mit '#' leitet  man einen Kommentar ein. In der Konsole reicht daher:
 ```{r eval=FALSE, echo=TRUE}
 install.packages("tidyverse", dependencies=TRUE) 
 install.packages("mosaic", dependencies=TRUE) 
+install.packages("corrgram", dependencies = T)
 ```
 
 Bitte bestätigen Sie alle Anfragen und haben Sie etwas Geduld. Es wird eine Menge nachgeladen. 
@@ -398,6 +399,12 @@ IQR(aVec)
 summary(aVec)
 ```
 
+```{r}
+library(mosaic)
+favstats(aVec)
+```
+
+
 ## Varianzen
 
 **R** berechnent die Varianz von Daten mit Hilfe der Formel
@@ -483,7 +490,7 @@ rm()
 
 ## Pakete
 
-* **R** ist iin **Paketen** organisiert.
+* **R** ist in **Paketen** organisiert.
 * Ein *Paket* ist eine kompakte Zusammenfassung von Code, Hilfeseiten, Daten, Beispielen usw. zu einem bestimmten Themengebiet.
 * **R** wächst durch ständig neue Pakete!
 * Mit der Installation von **R** haben Sie eine Grundausstattung an wichtigen Paketen, welche Sie nach belieben erweitern können und sollten!
@@ -496,7 +503,7 @@ Um ein Paket, zum Beispiel **ggplot2**, zu installieren benuzt man den Befehl:
 install.packages("ggplot2")
 ```
 
-Um gleichzeitig weitere, notwednige Pakete zu installieren nutzt man die Option "dependencies=TRUE":
+Um gleichzeitig weitere, notwendige Pakete zu installieren nutzt man die Option "dependencies=TRUE":
 ```{r, eval=FALSE, echo=TRUE}
 install.packages("ggplot2", dependencies=TRUE)
 ```
@@ -540,11 +547,11 @@ require(ggplot2)
         https://raw.githubusercontent.com/NMarkgraf/Etwas-R-zum-Nachmittag/master/Datasets/miete03.asc 
     ein. 
     
-    Drücken Sie *Update*.
+    Drücken Sie **Update**.
     
     Stellen Sie *Delimiter* auf *Tab*.
     
-    Drücken Sie dann *Import*
+    Drücken Sie dann **Import**
     
 - Via **R** direkt:
     Man kann auch direkt aus **R** mittels ein paar Zeilen die Daten laden!
@@ -605,7 +612,7 @@ barplot( table(miete03$rooms) )
 
 ```{r,  eval=TRUE, echo=TRUE}
 library(ggplot2) # Bibliothek laden!
-ggplot(miete03, aes( x = rooms)) + geom_bar()
+ggplot(miete03, aes(x = rooms)) + geom_bar()
 ```
 
 ## Mehr Informationen zu **ggplot2**
@@ -641,11 +648,11 @@ Im folgenden kann man ein paar der Möglichkeiten von **R** finden, wie man sie 
 Dazu nehmen wir die Daten *tips* aus dem Unterrichtsmaterial von Prof. Dr. S. Sauer.
 
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, warning=FALSE, error=FALSE, message=FALSE}
 library(readr)
 tips <- read_csv(file= paste0("https://raw.githubusercontent.com/sebastiansauer/",
                         "Daten_Unterricht/master/tips.csv"))
-#tips$X1 <- NULL
+tips$X1 <- NULL
 ```
 
 Darüberhinaus nutzen wir einige Befehle aus dem Paket **Mosaic**, welches wir dazu laden
@@ -667,15 +674,11 @@ dim(tips)
 ```
 
 
-Die ersten vier Zeilen:
-```{r}
-head(tips, 4)
-```
 
 ## Balkendiagramm bei kategorialen Daten
 
 ```{r}
-bargraph(~sex, data=tips)
+bargraph( ~sex, data=tips)
 ```
 
 
@@ -744,8 +747,7 @@ mosaicplot(tab)
 ## Korrelationsplot mit metrischen Variablen
 
 ```{r}
-# ggf: 
-# install.packages("corrgram", dependencies=T)
+# ggf:  install.packages("corrgram", dependencies=T)
 library(corrgram)
 corrgram(tips)
 ```
@@ -857,7 +859,22 @@ bei der die Variablen nach der Reihenfolge ihrer Wichtigkeit entfernt werden.
 step(Mod3)
 ```
 
+## Wie geht es weiter?
+
+* **Grammar of Graphic** und **ggplot2**
+* *dplyr* und die Welt des Datenmanagement
+* ...
+
 
 ## Quellen
 
 Ein großer Teil der Beispiele stammt von Prof. Dr. Oliver Gansser aus seinem Handout "Wichtige Befehle in R - Datenerhebung und Statistik" vom 15. Dezember 2016, welches mir von Prod. Dr. Schwarz freundlicherweise überlassen wurde.
+
+Diese Präsentation wurde mit **RMarkdown** und ein paar kleinen Helferlein (**NPFC**) erstellt.
+
+Sie finden die aktuelle Version unter:
+
+https://github.com/NMarkgraf/Etwas-R-zum-Nachmittag
+
+Erstellt wurde dieses Dokument mit **R** (Version `r getRversion()`) und  RStudio (1.0.136) am `r format(Sys.time(), "%d. %b %Y")` 
+
