@@ -54,7 +54,7 @@ knitr::opts_chunk$set(
 
 **Programmiersprache S**:
 
-- Von Bell Labs für Statistik, Simulation, Grafik entwickelt (Becker and Chambers; 1984) 
+- Von Bell Labs für Statistik, Simulation, Grafik entwickelt (Becker und Chambers; 1984) 
 - kommerzielle Implementation: **S-PLUS** 
     
 **Programmiersprache R**:
@@ -124,7 +124,7 @@ Natürlich können Sie **R** als Programmiersprache direkt von der Konsole aus f
 
 Besser ist es aber seine Skripte vorab mit Hilfe eines Texteditors zu schreiben und R dieses ausführen zu lassen.
 
-Noch besser ist die Nutzung von Integrierten Entwicklungsumgebenung (*IDE*), wie z.B.
+Noch besser ist die Nutzung von Integrierten Entwicklungsumgebung (*IDE*), wie z.B.
 
 - [RStudio](https://www.rstudio.com)  
 - [Rcmdr](http://www.rcommander.com)   
@@ -136,7 +136,7 @@ Noch besser ist die Nutzung von Integrierten Entwicklungsumgebenung (*IDE*), wie
 - **R** (Version 3.3.2) ,
     - **R** finden Sie hier: https://cran.rstudio.com oder https://www.r-project.org
     - Aktuell ist die Version 3.3.2
-    - **Achtung MAC-Nuzter!!!**: Sie benötigen zusätlich erst noch XQuartz. 
+    - **Achtung MAC-Nuzter!!!**: Sie benötigen zusätzlich erst noch XQuartz. 
         - XQuartz finden Sie hier: https://www.xquartz.org
         
 - **RStudio** (Desktop-Version 1.0.136) (vergessen Sie lieber den **R-Cmdr**)
@@ -151,7 +151,7 @@ Noch besser ist die Nutzung von Integrierten Entwicklungsumgebenung (*IDE*), wie
 
 ## Die wichtigsten Pakete und wie man diese installiert
 
-Im Allgemeinen instaliert man ein Paket <blubber> durch den Befehl:
+Im Allgemeinen installiert man ein Paket <blubber> durch den Befehl:
 ```{r echo=TRUE, eval=FALSE}
 install.packages("<blubber>", dependencies=TRUE)
 ```
@@ -165,7 +165,7 @@ Für einen guten Start sollte man folgende Pakete installieren:
     Das sind u.a. die Pakete:
     
     + [ggplot2](http://ggplot2.org)     # DAS Grafikpaket von *R*
-    + [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)       # Das Paket zur Daten manipulation
+    + [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)       # Das Paket zur Datenmanipulation
     + [readr](https://blog.rstudio.org/2016/08/05/readr-1-0-0/)       # Das Paket zum Einlesen von Daten 
 
 - **mosaic**
@@ -351,7 +351,7 @@ logischerVektor
 
 ## Eigenschaften von Vektoren
 
-**names(a)** gibt die Namen der Einträge des Vaktors $a$ zurück:
+**names(a)** gibt die Namen der Einträge des Vektors $a$ zurück:
 
 ```{r, eval=TRUE, echo=TRUE}
 weight <- c(67, 80, 72, 90)
@@ -407,7 +407,7 @@ favstats(aVec)
 
 ## Varianzen
 
-**R** berechnent die Varianz von Daten mit Hilfe der Formel
+**R** berechnet die Varianz von Daten mit Hilfe der Formel
 $$\frac1{n-1} \cdot \sum (x-\bar{x})^2,$$ 
 wie man leicht nachrechnen kann:
 
@@ -498,7 +498,7 @@ rm()
 
 ## Pakete installieren und aktualisieren
 
-Um ein Paket, zum Beispiel **ggplot2**, zu installieren benuzt man den Befehl:
+Um ein Paket, zum Beispiel **ggplot2**, zu installieren benutz man den Befehl:
 ```{r, eval=FALSE, echo=TRUE}
 install.packages("ggplot2")
 ```
@@ -512,7 +512,7 @@ Mit der Funktion
 ```{r, eval=FALSE, echo=TRUE}
 update.packages()
 ```
-werden installierte Pakete mit denen von CRAN hinterlegten verglichen und ggf. akualisiert.
+werden installierte Pakete mit denen von CRAN hinterlegten verglichen und ggf. aktualisiert.
 
 Es gibt aber noch andere Wege. (Z.B. direkt in RStudio)
 
@@ -639,13 +639,13 @@ Hier finden Sie Videos, die einige Schritte der Datenaufbereitung und deskriptiv
 - Korrelationsmatrix https://www.youtube.com/watch?v=pl92q_S-r8E
 - Datenmatrix erstellen https://youtu.be/-EaeBL9J4IE
 
-Die Videos wurden von Frau Prof. Ferreira erstellt. 
+Die Videos wurden von **Frau Prof. Ferreira** erstellt. 
 
 ## Eine kurze Datenanalyse
 
 Im folgenden kann man ein paar der Möglichkeiten von **R** finden, wie man sie in Vorlesungen braucht.
 
-Dazu nehmen wir die Daten *tips* aus dem Unterrichtsmaterial von Prof. Dr. S. Sauer.
+Dazu nehmen wir die Daten *tips* aus dem Unterrichtsmaterial von **Prof. Dr. Sebastian Sauer**.
 
 
 ```{r, echo=TRUE, warning=FALSE, error=FALSE, message=FALSE}
@@ -760,7 +760,7 @@ Mittelwert
 mean(tip~sex, data=tips)
 ```
 
-Anstatt *mean* können alle Lageparameter und Streumaße erechnet werden (min, max, median, sd, var):
+Anstatt *mean* können alle Lageparameter und Streumaße errechnet werden (min, max, median, sd, var):
 ```{r}
 favstats(tip~sex, data=tips)
 ```
@@ -806,7 +806,7 @@ Bei der Dokumentation von t-Tests ist es wichtig, einseitiges Testen von zweisei
 
 ## ANOVA (Varianzanalyse)
 
-Bezüglich einer Gruppe (nominale Variable) mit mehr als zwei levels wird eine metrische Variable getestet.
+Bezüglich einer Gruppe (nominale Variable) mit mehr als zwei Levels wird eine metrische Variable getestet.
 
 ```{r}
 bwplot(tip~day, data=tips)
@@ -836,7 +836,7 @@ summary(Mod1)
 
 ## Lineare Einfachregression mit kategorialer UV
 
-**Achtung:** Das nicht ausgegbene level in der Ausgabe ist das Referenzlevel.
+**Achtung:** Das nicht ausgegebene Level in der Ausgabe ist das Referenzlevel.
 
 ```{r}
 Mod2<-lm(tip~day, data=tips)
@@ -862,10 +862,10 @@ step(Mod3)
 
 ## Wie geht es weiter?
 
-Dieses kleine Kick-Off für **R** ist natürlich nicht vollsätndig. - Wo es lohnt aus meiner persönlichen Sicht lohnt weiter zu schauen sind die folgenden Themen:
+Dieses kleine Kick-Off für **R** ist natürlich nicht vollständig. - Wo es lohnt aus meiner persönlichen Sicht lohnt weiter zu schauen sind die folgenden Themen:
 
 * **Grammar of Graphic** und **ggplot2** für schönere und aussagekräftige Grafiken in **R**.
-* *tidyr*, *dplyr* und Co, die Welt des Datenmanagement in **R**
+* *tidyr*, [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)  und Co, die Welt des Datenmanagement in **R**
 * [*rmarkdown*](http://rmarkdown.rstudio.com) und der Weg zu eigenen Dokumenten 
 * [*Shiny*](http://shiny.rstudio.com) und die interaktive Webdarstellung von Statistiken 
 * *mosaic* 
@@ -873,6 +873,8 @@ Dieses kleine Kick-Off für **R** ist natürlich nicht vollsätndig. - Wo es loh
 ## Quellen
 
 Ein großer Teil der Beispiele stammt von **Prof. Dr. Oliver Gansser** aus seinem Handout *"Wichtige Befehle in R - Datenerhebung und Statistik"* vom 15. Dezember 2016, welches mir von **Prod. Dr. Joachim Schwarz** freundlicherweise überlassen wurde.
+
+Die Übersicht der Videos und viele andere Links entstammen dem Skript "Datenerhebung und Statistik" von **Prof. Dr. Sebastian Sauer**.
 
 Diese Präsentation wurde mit **RMarkdown** und ein paar kleinen Helferlein (**NPFC**) erstellt.
 
