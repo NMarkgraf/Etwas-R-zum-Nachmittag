@@ -836,11 +836,12 @@ summary(Mod1)
 
 ## Lineare Einfachregression mit kategorialer UV
 
+**Achtung:** Das nicht ausgegbene level in der Ausgabe ist das Referenzlevel.
+
 ```{r}
 Mod2<-lm(tip~day, data=tips)
 summary(Mod2)
 ```
-**Achtung:** Das nicht ausgegbene level in der Ausgabe ist das Referenzlevel.
 
 ## Multiple Regression
 
@@ -861,18 +862,21 @@ step(Mod3)
 
 ## Wie geht es weiter?
 
-* **Grammar of Graphic** und **ggplot2**
-* *dplyr* und die Welt des Datenmanagement
-* ...
+Dieses kleine Kick-Off für **R** ist natürlich nicht vollsätndig. - Wo es lohnt aus meiner persönlichen Sicht lohnt weiter zu schauen sind die folgenden Themen:
 
+* **Grammar of Graphic** und **ggplot2** für schönere und aussagekräftige Grafiken in **R**.
+* *tidyr*, *dplyr* und Co, die Welt des Datenmanagement in **R**
+* [*rmarkdown*](http://rmarkdown.rstudio.com) und der Weg zu eigenen Dokumenten 
+* [*Shiny*](http://shiny.rstudio.com) und die interaktive Webdarstellung von Statistiken 
+* *mosaic* 
 
 ## Quellen
 
-Ein großer Teil der Beispiele stammt von Prof. Dr. Oliver Gansser aus seinem Handout "Wichtige Befehle in R - Datenerhebung und Statistik" vom 15. Dezember 2016, welches mir von Prod. Dr. Schwarz freundlicherweise überlassen wurde.
+Ein großer Teil der Beispiele stammt von **Prof. Dr. Oliver Gansser** aus seinem Handout *"Wichtige Befehle in R - Datenerhebung und Statistik"* vom 15. Dezember 2016, welches mir von **Prod. Dr. Joachim Schwarz** freundlicherweise überlassen wurde.
 
 Diese Präsentation wurde mit **RMarkdown** und ein paar kleinen Helferlein (**NPFC**) erstellt.
 
-Sie finden die aktuelle Version unter:
+Sie finden die (tages-)aktuelle Version inklusive der Quellen unter:
 
 https://github.com/NMarkgraf/Etwas-R-zum-Nachmittag
 
