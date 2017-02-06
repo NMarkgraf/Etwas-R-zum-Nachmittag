@@ -164,7 +164,7 @@ Für einen guten Start sollte man folgende Pakete installieren:
   
     Das sind u.a. die Pakete:
     
-    + [ggplot2](http://ggplot2.org)     # DAS Grafikpaket von *R*
+    + [ggplot2](http://ggplot2.org)     # **DAS** Grafikpaket für **R**
     + [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)       # Das Paket zur Datenmanipulation
     + [readr](https://blog.rstudio.org/2016/08/05/readr-1-0-0/)       # Das Paket zum Einlesen von Daten 
 
